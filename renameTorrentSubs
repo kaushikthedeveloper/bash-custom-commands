@@ -1,0 +1,15 @@
+# renames a file inside the folder with folder name + '.srt'
+
+echo "In Dir : $(pwd)"
+echo
+folders=$(ls -1v)
+echo "---Folders---"
+echo "$folders"
+for folder in $folders; do
+	file=$(ls ${folder} -1v)	# should only contain a single file
+	echo "Original : $folder/${file[0]}"
+	new_subtitle_name=${folder}/${folder}.srt
+	$(mv ${folder}/${file[0]} ${new_subtitle_name})
+	$(cp ${folder}/${folder}.srt ./)
+	echo "Renamed to ${new_subtitle_name}"
+done

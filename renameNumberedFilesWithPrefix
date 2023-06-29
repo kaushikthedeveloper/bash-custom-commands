@@ -1,0 +1,12 @@
+#!/bin/bash
+add_constant=${3:-1}
+echo "Prefix given for files : $1"
+echo "Extension given for files : $2"
+echo "File numbering starting from : $add_constant"
+x=$(ls -1v) ; printf "%s\n" "$x" > temp.txt
+mapfile -t arr < temp.txt
+for i in "${!arr[@]}"; do
+	echo "Rename ${arr[i]} to $1$((i+add_constant)).$2";
+	mv "${arr[i]}" "$1$((i+add_constant)).$2";
+done
+rm temp.txt
